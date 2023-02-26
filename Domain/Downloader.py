@@ -27,6 +27,7 @@ class Downloader:
         pass
 
     def get_data(self):
+        print('URL: ' + self.requests_options['url'])
         self.requests_response = requests.request(self.requests_options['method'], self.requests_options['url'], data=self.requests_options['data'])
    
     def process_data(self):

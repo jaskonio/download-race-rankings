@@ -3,22 +3,26 @@ from bs4 import BeautifulSoup
 
 class Valenciaciudaddelrunning(Downloader):
     url_base = 'https://resultados.valenciaciudaddelrunning.com/medio-maraton-clubs.php?y=$$year$$'
+    team_filter = 'REDOLAT TEAM CLUB'
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, url) -> None:
+        super().__init__(url)
     
     def process_url(self):
+        self.requests_options['method'] = 'POST'
+
         url = self.url
         
         year = ''.join([str(x) for x in [int(s) for s in url if s.isdigit()]])
-        url = self.url_base.replace('$$year$$', year)
+
+        self.requests_options['url'] = self.url_base.replace('$$year$$', year)
+        #self.requests_options['url'] = self.url_base.replace('$$team_name$$', self.official_team_name)
 
         race_name = 'medio-maraton-clasificados-$$year$$'
         self.race_name = race_name.replace('$$year$$', year)
 
-
         payload_search_box_name = 'search-box' if int(year) > 2017 else'selequipo'
-        self.requests_options['data'] = {payload_search_box_name: self.official_team_name}
+        self.requests_options['data'] = {payload_search_box_name: self.team_filter}
 
     def process_data(self):
         self.race_data = self.__process_ValenciaCiudadDelRunning_data()
@@ -26,7 +30,7 @@ class Valenciaciudaddelrunning(Downloader):
 
     def __process_ValenciaCiudadDelRunning_data(self):
         req = self.requests_response
-
+        
         status_code = req.status_code
 
         runners = []

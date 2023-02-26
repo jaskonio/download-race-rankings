@@ -16,6 +16,10 @@ pip3 install -r requirements.txt
 ## 2. Execution:
 
 ```cmd
-main.py -l https://sportmaniacs.com/es/races/viii-15k-nocturna-valencia-banco-mediolanum/61466287-1238-4829-ab95-4ae8ac1f1f9b
+# sportmaniacs
+python3 main.py -l https://sportmaniacs.com/es/races/viii-15k-nocturna-valencia-banco-mediolanum/61466287-1238-4829-ab95-4ae8ac1f1f9b
+
+# Valenciaciudaddelrunning
+python3 main.py -l https://www.valenciaciudaddelrunning.com/medio/clasificaciones-medio-maraton-2022
 ````
 
