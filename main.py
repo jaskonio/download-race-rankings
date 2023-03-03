@@ -4,6 +4,7 @@ import os
 import argparse
 
 from Domain.Sportmaniacs import Sportmaniacs
+from Domain.TopRun import TopRun
 from Domain.Valenciaciudaddelrunning import Valenciaciudaddelrunning
 
 def create_excel(data, file_name):
@@ -31,6 +32,9 @@ def race_factory(url_race):
     elif 'valenciaciudaddelrunning' in url_race:
         print("Platform: valenciaciudaddelrunning")
         downloader = Valenciaciudaddelrunning(url_race)
+    elif 'toprun' in url_race:
+        print("Platform: toprun")
+        downloader = TopRun(url_race)
     else:
         print("Platform not compatible")
 
